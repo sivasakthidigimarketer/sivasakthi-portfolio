@@ -1,23 +1,273 @@
-body {
-  font-family: Arial;
-  background: #0d1117;
-  color: white;
+* {
   margin: 0;
-  padding: 20px;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-header {
-  text-align: center;
-  margin-bottom: 40px;
+html {
+  scroll-behavior: smooth;
 }
 
-h1 {
-  font-size: 40px;
+body {
+  font-family: Arial, sans-serif;
+  background: #0b0f19;
+  color: #ffffff;
+  line-height: 1.6;
 }
 
-section {
+a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.hero {
+  min-height: 100vh;
+  padding: 20px 8%;
+  background:
+    linear-gradient(rgba(11, 15, 25, 0.88), rgba(11, 15, 25, 0.96)),
+    radial-gradient(circle at top right, #1e3a8a 0%, transparent 35%),
+    radial-gradient(circle at left, #0f766e 0%, transparent 30%);
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0 40px;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.logo {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.nav-links a {
+  color: #cbd5e1;
+  font-size: 15px;
+}
+
+.nav-links a:hover {
+  color: #ffffff;
+}
+
+.hero-content {
+  max-width: 760px;
+  padding-top: 70px;
+}
+
+.tag {
+  display: inline-block;
+  margin-bottom: 18px;
+  color: #93c5fd;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+}
+
+.hero-content h1 {
+  font-size: 58px;
+  line-height: 1.1;
+  margin-bottom: 20px;
+  max-width: 800px;
+}
+
+.hero-text {
+  font-size: 18px;
+  color: #cbd5e1;
+  max-width: 680px;
   margin-bottom: 30px;
-  padding: 20px;
-  background: #161b22;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: inline-block;
+  padding: 14px 24px;
   border-radius: 10px;
+  font-weight: 700;
+  transition: 0.3s ease;
+}
+
+.btn-primary {
+  background: linear-gradient(90deg, #2563eb, #0ea5e9);
+  color: white;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  border: 1px solid #334155;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.section {
+  width: 84%;
+  margin: 0 auto;
+  padding: 90px 0 20px;
+}
+
+.section-title {
+  margin-bottom: 28px;
+}
+
+.section-title p {
+  color: #60a5fa;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  margin-bottom: 8px;
+}
+
+.section-title h2 {
+  font-size: 36px;
+}
+
+.card {
+  background: #111827;
+  border: 1px solid #1f2937;
+  border-radius: 18px;
+  padding: 28px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.22);
+}
+
+.card p {
+  color: #d1d5db;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px;
+}
+
+.service-card h3,
+.project-card h3,
+.contact-card h3 {
+  font-size: 22px;
+  margin-bottom: 12px;
+}
+
+.project-label {
+  display: inline-block;
+  margin-bottom: 14px;
+  font-size: 12px;
+  color: #93c5fd;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.highlight-section {
+  padding-top: 70px;
+}
+
+.highlight-box {
+  background: linear-gradient(135deg, #172554, #0f172a);
+  border: 1px solid #1e293b;
+  border-radius: 22px;
+  padding: 42px;
+}
+
+.mini-text {
+  color: #93c5fd;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  margin-bottom: 10px;
+}
+
+.highlight-box h2 {
+  font-size: 38px;
+  margin-bottom: 16px;
+  line-height: 1.2;
+}
+
+.highlight-box p {
+  color: #d1d5db;
+  max-width: 760px;
+}
+
+.contact-grid {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.contact-card a {
+  color: #93c5fd;
+  word-break: break-word;
+}
+
+.footer {
+  text-align: center;
+  padding: 40px 20px;
+  color: #94a3b8;
+  font-size: 14px;
+}
+
+@media (max-width: 900px) {
+  .hero-content h1 {
+    font-size: 40px;
+  }
+
+  .grid,
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .section {
+    width: 90%;
+  }
+
+  .highlight-box h2 {
+    font-size: 30px;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero {
+    padding: 20px 5%;
+  }
+
+  .section {
+    width: 92%;
+  }
+
+  .hero-content {
+    padding-top: 40px;
+  }
+
+  .hero-content h1 {
+    font-size: 32px;
+  }
+
+  .hero-text {
+    font-size: 16px;
+  }
+
+  .section-title h2 {
+    font-size: 28px;
+  }
+
+  .card,
+  .highlight-box {
+    padding: 22px;
+  }
 }
