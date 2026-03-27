@@ -79,8 +79,15 @@ a {
 }
 
 .hero {
-  min-height: 100vh;
-  padding: 24px 8% 50px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 100px 10%;
+  gap: 40px;
+
+  background: url('hero-bg.png') no-repeat right center;
+  background-size: contain;
 }
 
 .navbar {
