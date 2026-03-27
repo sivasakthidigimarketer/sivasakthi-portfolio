@@ -84,6 +84,7 @@ a {
   position: relative;
   overflow: hidden;
 }
+
 .navbar {
   width: 100%;
   max-width: 1280px;
@@ -96,6 +97,7 @@ a {
   position: relative;
   z-index: 5;
 }
+
 .logo {
   font-size: 30px;
   font-weight: 800;
@@ -158,6 +160,7 @@ a {
   align-items: center;
   gap: 44px;
 }
+
 .hero-content {
   max-width: 680px;
   z-index: 2;
@@ -239,6 +242,7 @@ a {
   gap: 18px;
   margin-top: 8px;
 }
+
 .stat-card {
   padding: 20px;
   border-radius: 18px;
@@ -412,14 +416,6 @@ a {
     radial-gradient(circle at top right, rgba(14, 165, 233, 0.18), transparent 35%);
 }
 
-.analytics-card img,
-.case-visual img {
-  width: 100%;
-  border-radius: 18px;
-  display: block;
-  object-fit: cover;
-}
-
 .case-study-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -440,6 +436,13 @@ a {
 .case-row:last-child {
   border-bottom: none;
   padding-bottom: 0;
+}
+
+.case-visual img {
+  width: 100%;
+  border-radius: 18px;
+  display: block;
+  object-fit: cover;
 }
 
 .highlight-box {
