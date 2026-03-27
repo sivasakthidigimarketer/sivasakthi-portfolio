@@ -86,8 +86,33 @@ img {
 
 /* Hero */
 .hero {
-  min-height: 100vh;
-  padding: 24px 8% 50px;
+    position: relative;
+    min-height: 100vh;
+    padding: 100px 8% 50px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+
+    background: url('images/hero-bg.png') no-repeat right center;
+    background-size: cover;
+}
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to right,
+        rgba(10, 15, 25, 0.9),
+        rgba(10, 15, 25, 0.5),
+        rgba(10, 15, 25, 0.2)
+    );
+}
+
+.hero > * {
+    position: relative;
+    z-index: 2;
 }
 
 .navbar {
