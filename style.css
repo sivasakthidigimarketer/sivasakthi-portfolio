@@ -448,8 +448,10 @@ img {
 }
 
 .analytics-card img {
-  width: 100%;
-  border-radius: 18px;
+    width: 100%;
+    border-radius: 18px;
+    object-fit: cover;
+    display: block;
 }
 
 /* Results */
