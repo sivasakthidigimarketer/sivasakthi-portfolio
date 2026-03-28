@@ -1,65 +1,89 @@
-const reveals = document.querySelectorAll('.reveal');
+// ================================
+// SAFE SCRIPT (NO BREAK ERRORS)
+// ================================
 
-function revealOnScroll() {
-  const windowHeight = window.innerHeight;
+// Run only after page loads
+document.addEventListener("DOMContentLoaded", function () {
 
-  reveals.forEach((element) => {
-    const elementTop = element.getBoundingClientRect().top;
-    const visiblePoint = 100;
+  // ================================
+  // 1. COUNTER ANIMATION
+  // ================================
+  const counters = document.querySelectorAll('.counter');
 
-    if (elementTop < windowHeight - visiblePoint) {
-      element.classList.add('active');
+  counters.forEach(counter => {
+    const target = +counter.getAttribute('data-target') || 0;
+
+    let count = 0;
+    const speed = 30;
+
+    const updateCount = () => {
+      const increment = target / 50;
+
+      if (count < target) {
+        count += increment;
+        counter.innerText = Math.ceil(count);
+        setTimeout(updateCount, speed);
+      } else {
+        counter.innerText = target + "%";
+      }
+    };
+
+    if (target > 0) {
+      updateCount();
     }
   });
-}
 
-window.addEventListener('scroll', revealOnScroll);
-window.addEventListener('load', revealOnScroll);
+  // ================================
+  // 2. SCROLL FADE-IN ANIMATION
+  // ================================
+  const revealElements = document.querySelectorAll('.reveal');
 
-const menuToggle = document.querySelector('.menu-toggle');
-const navLinks = document.querySelector('.nav-links');
+  const revealOnScroll = () => {
+    const windowHeight = window.innerHeight;
 
-if (menuToggle && navLinks) {
-  menuToggle.addEventListener('click', () => {
-    navLinks.classList.toggle('show');
-  });
-}
+    revealElements.forEach(el => {
+      const elementTop = el.getBoundingClientRect().top;
 
-const counters = document.querySelectorAll('.counter');
-
-counters.forEach(counter => {
-  const update = () => {
-    const target = +counter.getAttribute('data-target');
-    const current = +counter.innerText;
-
-    const increment = target / 50;
-
-    if (current < target) {
-      counter.innerText = Math.ceil(current + increment);
-      setTimeout(update, 30);
-    } else {
-      counter.innerText = target + "%";
-    }
+      if (elementTop < windowHeight - 80) {
+        el.classList.add('active');
+      }
+    });
   };
 
-  update();
+  window.addEventListener('scroll', revealOnScroll);
+  revealOnScroll(); // run once
+
+  // ================================
+  // 3. SMOOTH SCROLL (NAV LINKS)
+  // ================================
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+
+      const target = document.querySelector(this.getAttribute('href'));
+
+      if (target) {
+        target.scrollIntoView({
+          behavior: 'smooth'
+        });
+      }
+    });
+  });
+
+  // ================================
+  // 4. BUTTON HOVER MICRO EFFECT
+  // ================================
+  const buttons = document.querySelectorAll('.btn');
+
+  buttons.forEach(btn => {
+    btn.addEventListener('mousemove', (e) => {
+      const rect = btn.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      btn.style.setProperty('--x', x + 'px');
+      btn.style.setProperty('--y', y + 'px');
+    });
+  });
+
 });
-
-  updateCounter();
-}
-
-let counterStarted = false;
-function startCounters() {
-  if (counterStarted) return;
-  const metricsSection = document.querySelector('.metrics-strip');
-  if (!metricsSection) return;
-
-  const top = metricsSection.getBoundingClientRect().top;
-  if (top < window.innerHeight - 80) {
-    counters.forEach(runCounter);
-    counterStarted = true;
-  }
-}
-
-window.addEventListener('scroll', startCounters);
-window.addEventListener('load', startCounters);
