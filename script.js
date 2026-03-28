@@ -27,20 +27,23 @@ if (menuToggle && navLinks) {
 
 const counters = document.querySelectorAll('.counter');
 
-function runCounter(counter) {
-  const target = +counter.getAttribute('data-target');
-  let current = 0;
-  const increment = Math.max(1, Math.ceil(target / 60));
+counters.forEach(counter => {
+  const update = () => {
+    const target = +counter.getAttribute('data-target');
+    const current = +counter.innerText;
 
-  const updateCounter = () => {
-    current += increment;
-    if (current >= target) {
-      counter.innerText = target + "+";
+    const increment = target / 50;
+
+    if (current < target) {
+      counter.innerText = Math.ceil(current + increment);
+      setTimeout(update, 30);
     } else {
-      counter.innerText = current + "+";
-      requestAnimationFrame(updateCounter);
+      counter.innerText = target + "%";
     }
   };
+
+  update();
+});
 
   updateCounter();
 }
