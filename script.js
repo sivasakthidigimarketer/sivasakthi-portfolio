@@ -1,42 +1,31 @@
-// ================================
-// SAFE SCRIPT (NO BREAK ERRORS)
-// ================================
-
-// Run only after page loads
 document.addEventListener("DOMContentLoaded", function () {
-
   // ================================
-  // 1. COUNTER ANIMATION
+  // 1. MOBILE MENU TOGGLE
   // ================================
-  const counters = document.querySelectorAll('.counter');
+  const menuToggle = document.querySelector(".menu-toggle");
+  const navLinks = document.querySelector(".nav-links");
 
-  counters.forEach(counter => {
-    const target = +counter.getAttribute('data-target') || 0;
+  if (menuToggle && navLinks) {
+    menuToggle.addEventListener("click", function () {
+      navLinks.classList.toggle("show");
 
-    let count = 0;
-    const speed = 30;
+      const isExpanded = navLinks.classList.contains("show");
+      menuToggle.setAttribute("aria-expanded", isExpanded ? "true" : "false");
+    });
 
-    const updateCount = () => {
-      const increment = target / 50;
-
-      if (count < target) {
-        count += increment;
-        counter.innerText = Math.ceil(count);
-        setTimeout(updateCount, speed);
-      } else {
-        counter.innerText = target + "%";
-      }
-    };
-
-    if (target > 0) {
-      updateCount();
-    }
-  });
+    // Close menu after clicking a nav link on mobile
+    navLinks.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", function () {
+        navLinks.classList.remove("show");
+        menuToggle.setAttribute("aria-expanded", "false");
+      });
+    });
+  }
 
   // ================================
   // 2. SCROLL FADE-IN ANIMATION
   // ================================
-  const revealElements = document.querySelectorAll('.reveal');
+  const revealElements = document.querySelectorAll(".reveal");
 
   const revealOnScroll = () => {
     const windowHeight = window.innerHeight;
@@ -45,26 +34,30 @@ document.addEventListener("DOMContentLoaded", function () {
       const elementTop = el.getBoundingClientRect().top;
 
       if (elementTop < windowHeight - 80) {
-        el.classList.add('active');
+        el.classList.add("active");
       }
     });
   };
 
-  window.addEventListener('scroll', revealOnScroll);
-  revealOnScroll(); // run once
+  window.addEventListener("scroll", revealOnScroll);
+  revealOnScroll();
 
   // ================================
-  // 3. SMOOTH SCROLL (NAV LINKS)
+  // 3. SMOOTH SCROLL
   // ================================
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-      e.preventDefault();
+    anchor.addEventListener("click", function (e) {
+      const targetSelector = this.getAttribute("href");
 
-      const target = document.querySelector(this.getAttribute('href'));
+      if (!targetSelector || targetSelector === "#") return;
+
+      const target = document.querySelector(targetSelector);
 
       if (target) {
+        e.preventDefault();
         target.scrollIntoView({
-          behavior: 'smooth'
+          behavior: "smooth",
+          block: "start"
         });
       }
     });
@@ -73,17 +66,16 @@ document.addEventListener("DOMContentLoaded", function () {
   // ================================
   // 4. BUTTON HOVER MICRO EFFECT
   // ================================
-  const buttons = document.querySelectorAll('.btn');
+  const buttons = document.querySelectorAll(".btn");
 
   buttons.forEach(btn => {
-    btn.addEventListener('mousemove', (e) => {
+    btn.addEventListener("mousemove", (e) => {
       const rect = btn.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
 
-      btn.style.setProperty('--x', x + 'px');
-      btn.style.setProperty('--y', y + 'px');
+      btn.style.setProperty("--x", `${x}px`);
+      btn.style.setProperty("--y", `${y}px`);
     });
   });
-
 });
