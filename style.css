@@ -319,14 +319,45 @@ img {
   line-height: 1.7;
 }
 
+.services-grid,
+.proof-grid,
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
 .problem-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 24px;
   align-items: stretch;
+  max-width: 980px;
 }
 
 .problem-grid .service-card {
+  min-height: 230px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+#problem .section-top,
+#problem .problem-grid {
+  max-width: 980px;
+}
+
+#problem .section-top {
+  margin-left: 0;
+}
+
+#problem .problem-grid {
+  margin-left: 0;
+}
+
+#problem .section-intro {
+  max-width: 760px;
+}.service-card {
   min-height: 230px;
   display: flex;
   flex-direction: column;
