@@ -318,21 +318,11 @@ img {
   font-size: 16px;
   line-height: 1.7;
 }
-
-.services-grid,
-.proof-grid,
-.contact-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-}
-
 .problem-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 24px;
   align-items: stretch;
-  max-width: 980px;
 }
 
 .problem-grid .service-card {
@@ -340,19 +330,6 @@ img {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-}
-
-#problem .section-top,
-#problem .problem-grid {
-  max-width: 980px;
-}
-
-#problem .section-top {
-  margin-left: 0;
-}
-
-#problem .problem-grid {
-  margin-left: 0;
 }
 
 #problem .section-intro {
@@ -764,5 +741,10 @@ img {
 
   .hero {
     padding: 92px 5% 60px;
+  }
+}
+@media(max-width:768px){
+  .problem-grid{
+    grid-template-columns:1fr;
   }
 }
