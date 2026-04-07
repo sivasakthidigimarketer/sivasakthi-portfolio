@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // Close menu after clicking a nav link on mobile
-    navLinks.querySelectorAll("a").forEach(link => {
+    navLinks.querySelectorAll("a").forEach((link) => {
       link.addEventListener("click", function () {
         navLinks.classList.remove("show");
         menuToggle.setAttribute("aria-expanded", "false");
@@ -26,11 +26,12 @@ document.addEventListener("DOMContentLoaded", function () {
   // 2. SCROLL FADE-IN ANIMATION
   // ================================
   const revealElements = document.querySelectorAll(".reveal");
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   const revealOnScroll = () => {
     const windowHeight = window.innerHeight;
 
-    revealElements.forEach(el => {
+    revealElements.forEach((el) => {
       const elementTop = el.getBoundingClientRect().top;
 
       if (elementTop < windowHeight - 80) {
@@ -39,13 +40,17 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   };
 
-  window.addEventListener("scroll", revealOnScroll);
-  revealOnScroll();
+  if (!prefersReducedMotion) {
+    window.addEventListener("scroll", revealOnScroll);
+    revealOnScroll();
+  } else {
+    revealElements.forEach((el) => el.classList.add("active"));
+  }
 
   // ================================
   // 3. SMOOTH SCROLL
   // ================================
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener("click", function (e) {
       const targetSelector = this.getAttribute("href");
 
@@ -56,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function () {
       if (target) {
         e.preventDefault();
         target.scrollIntoView({
-          behavior: "smooth",
+          behavior: prefersReducedMotion ? "auto" : "smooth",
           block: "start"
         });
       }
@@ -68,7 +73,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // ================================
   const buttons = document.querySelectorAll(".btn");
 
-  buttons.forEach(btn => {
+  buttons.forEach((btn) => {
     btn.addEventListener("mousemove", (e) => {
       const rect = btn.getBoundingClientRect();
       const x = e.clientX - rect.left;
@@ -78,4 +83,35 @@ document.addEventListener("DOMContentLoaded", function () {
       btn.style.setProperty("--y", `${y}px`);
     });
   });
+
+  // ================================
+  // 5. ACTIVE NAV LINK ON SCROLL
+  // ================================
+  const sections = document.querySelectorAll("section[id]");
+  const navItems = document.querySelectorAll(".nav-links a");
+
+  const setActiveNav = () => {
+    let currentSection = "";
+
+    sections.forEach((section) => {
+      const sectionTop = section.offsetTop - 120;
+      const sectionHeight = section.offsetHeight;
+
+      if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+        currentSection = section.getAttribute("id");
+      }
+    });
+
+    navItems.forEach((link) => {
+      link.classList.remove("active");
+      const href = link.getAttribute("href");
+
+      if (href === `#${currentSection}`) {
+        link.classList.add("active");
+      }
+    });
+  };
+
+  window.addEventListener("scroll", setActiveNav);
+  setActiveNav();
 });
